@@ -1,0 +1,63 @@
+:root {
+  --primary: #3ca7be;
+  --primary-dark: #5e8ac6;
+  --primary-light: #ff5c8d;
+  --primary-gradient: linear-gradient(135deg, #3ca7be, #5e8ac6);
+  --secondary: #5c6bc0;
+  --accent: #26a69a;
+  --light: #f8f9fa;
+  --dark: #212121;
+  --gray: #757575;
+  --background-color: #f4f7f6;
+  --light-gray: #e0e0e0;
+  --success: #43a047;
+  --warning: #ffa000;
+  --danger: #e53935;
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --transition: all 0.3s ease;
+  --background: linear-gradient(to right, #00748cc7, #0b3065b5);
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: #fafafa;
+  color: var(--dark);
+  line-height: 1.6;
+}
+
+.p {
+  font-size: 0.9rem;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+}
+
+.grid {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container-for-body {
+  width: 80%;
+  margin: 0 auto;
+  padding: 0px 20px;
+}

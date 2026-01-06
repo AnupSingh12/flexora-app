@@ -1,0 +1,37 @@
+[
+  {
+    "description": "Explore a handpicked selection of the latest fashion from top brands — all in one place. Whether you're into casual, bold, or timeless styles, Flexora brings you the freshest trends to fit your vibe.",
+    "menPage": "/Clothes/MenClothes",
+    "womenPage": "/Clothes/WomenClothes",
+    "category": "Clothes",
+    "imgSrc": "src/assets/photos/Body/Carousel/image1.jpg"
+  },
+  {
+    "description": "Step into style with our curated collection of shoes from trusted and trending labels. From sneakers to boots and everything in between, Flexora helps you find your perfect pair with ease.",
+    "menPage": "/Shoes/MenShoes",
+    "womenPage": "/Shoes/WomenShoes",
+    "category": "Footwear",
+    "imgSrc": "src/assets/photos/Body/Carousel/image2.jpg"
+  },
+  {
+    "description": "Make every second count with statement timepieces from leading brands. From minimalist to bold, our watch collection blends fashion and function — so you always stay on trend and on time.",
+    "menPage": "/Watches/MenWatches",
+    "womenPage": "/Watches/WomenWatches",
+    "category": "Watches",
+    "imgSrc": "src/assets/photos/Body/Carousel/image3.jpg"
+  },
+  {
+    "description": "In the Gen Z world, style moves fast — from fits that vibe, to sneakers that speak, to watches that keep you on trend and on time.",
+    "menPage": "/GenZ/GenZMen",
+    "womenPage": "/GenZ/GenZWomen",
+    "category": "GenZ",
+    "imgSrc": "src/assets/photos/Body/Carousel/image4.jpg"
+  },
+  {
+    "description": "Millennials value sophistication with comfort — curated clothing, versatile shoes, and timepieces that add a refined touch to every look.",
+    "menPage": "/Millennial/MillennialMen",
+    "womenPage": "/Millennial/MillennialWomen",
+    "category": "Millennial",
+    "imgSrc": "src/assets/photos/Body/Carousel/image5.jpg"
+  }
+]

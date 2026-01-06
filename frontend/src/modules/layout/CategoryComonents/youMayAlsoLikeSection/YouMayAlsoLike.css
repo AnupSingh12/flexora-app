@@ -1,0 +1,184 @@
+.you-may-also-like {
+  margin-top: 40px;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  background: var(--background);
+  color: white;
+}
+
+.you-may-also-like h2 {
+  color: var(--dark);
+}
+
+.you-may-also-like hr {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Unique container for cards */
+.you-may-also-like-cards {
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 30px;
+}
+
+/* Individual card item styling */
+.you-may-also-like-card-item {
+  display: flex;
+  flex-direction: column;
+  background-color: ghostwhite;
+  transition: 0.3s;
+  border-radius: 15px;
+  overflow: hidden;
+  color: var(--dark);
+}
+
+.you-may-also-like-card-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Card image container */
+.you-may-also-like-card-img-div {
+  cursor: pointer;
+  overflow: hidden;
+}
+
+/* Card image styling */
+.you-may-also-like-card-img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.you-may-also-like-card-img-div:hover .you-may-also-like-card-img {
+  transform: scale(1.05);
+}
+
+/* Card header with brand and color */
+.you-may-also-like-card-head {
+  padding: 10px 15px;
+}
+
+.you-may-also-like-card-head h3 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.you-may-also-like-card-head p {
+  margin: 5px 0 0 0;
+  font-size: 0.8rem;
+  color: var(--gray);
+}
+
+/* Rating styling */
+.you-may-also-like-card-rating {
+  padding-left: 15px;
+  color: #f5b32a;
+  font-size: 0.9rem;
+}
+
+/* Footer with price and actions */
+.you-may-also-like-card-footer {
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 15px 15px 15px;
+  margin-top: auto;
+}
+
+.you-may-also-like-card-footer > span {
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+}
+
+/* Action buttons container */
+.you-may-also-like-card-actions {
+  justify-content: flex-end;
+  gap: 15px;
+  display: flex;
+}
+
+/* Cart button styling */
+.you-may-also-like-btn-cart {
+  text-decoration: none;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: var(--gray);
+  transition: color 0.2s;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+.you-may-also-like-btn-cart:hover {
+  color: var(--primary);
+}
+
+/* Wishlist button styling */
+.you-may-also-like-btn-wishlist {
+  text-decoration: none;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: var(--gray);
+  transition: color 0.2s;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+.you-may-also-like-btn-wishlist:hover {
+  color: #ff4757;
+}
+
+.you-may-also-like-btn-wishlist.active {
+  color: #ff4757;
+}
+
+/* Error message styling */
+.you-may-also-like .error {
+  color: #ff4757;
+  padding: 15px;
+  text-align: center;
+  font-weight: 500;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .you-may-also-like-cards {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+  }
+
+  .you-may-also-like-card-head {
+    padding: 8px 10px;
+  }
+
+  .you-may-also-like-card-footer {
+    padding: 0 10px 10px 10px;
+  }
+
+  .you-may-also-like-card-actions {
+    gap: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .you-may-also-like-cards {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 10px;
+  }
+
+  .you-may-also-like-card-rating {
+    font-size: 0.8rem;
+  }
+
+  .you-may-also-like-card-head h3 {
+    font-size: 0.9rem;
+  }
+
+  .you-may-also-like-card-head p {
+    font-size: 0.7rem;
+  }
+}

@@ -1,0 +1,193 @@
+
+.upper-section {
+  height: auto;
+  padding: 50px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.upper-body-part {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  gap: 10px;
+}
+
+.fashion-text {
+  display: flex;
+  align-items: baseline;
+  gap: 20px;
+  justify-content: center;
+  width: 40%;
+  flex-direction: column;
+}
+
+.fashion-text h1 {
+  font-size: 4rem;
+  line-height: 1.2;
+}
+
+.fashion-text p {
+  font-size: 1.3rem;
+  line-height: 1.2;
+}
+@media (min-width: 425px) and (max-width: 768px) {
+  .fashion-text {
+    width: 75%;
+    font-size: 0.8rem;
+  }
+}
+
+@media (min-width: 320px) and (max-width: 425px) {
+  .fashion-text {
+    width: 80%;
+    font-size: 0.9rem;
+  }
+}
+
+.fashion-text > h1 {
+  font-size: 4.5rem;
+}
+
+.fashion-text > h1,
+.fashion-text > p {
+  color: black;
+}
+.fashion-text-btn {
+  gap: 15px;
+}
+
+.fashion-text-btn-him {
+  font-size: 18px;
+  font-weight: 500;
+  border: none;
+  background: var(--primary);
+  min-width: 86px;
+  padding: 8px 20px;
+  color: white;
+  transition: var(--transition);
+  border-radius: 8px;
+}
+
+.fashion-text-btn-him:hover {
+  border: 1.5px solid var(--primary);
+  background: white;
+  color: var(--primary);
+  transition: translateY(-2px);
+  cursor: pointer;
+}
+
+.fashion-text-btn-her {
+  background: none;
+  font-size: 18px;
+  border: 1.5px solid var(--primary);
+  min-width: 88px;
+  cursor: pointer;
+  padding: 8px 20px;
+  border-radius: 10px;
+  color: var(--primary);
+  font-weight: 500;
+  transition: var(--transition);
+}
+
+.fashion-text-btn-her:hover {
+  background-color: var(--primary);
+  color: white;
+  transform: translateY(-2px);
+  cursor: pointer;
+}
+
+.Fashion-img {
+  width: 60%;
+}
+
+@media (min-width: 320px) and (max-width: 500px) {
+  .Fashion-img {
+    width: 100%;
+  }
+}
+@media (min-width: 500px) and (max-width: 768px) {
+  .Fashion-img {
+    width: 80%;
+  }
+}
+.Fashion-img img {
+  width: 100%;
+}
+
+@media (min-width: 1000px) and (max-width: 1200px) {
+  .Fashion-img {
+    width: 60%;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1000px) {
+  .Fashion-img {
+    width: 60%;
+  }
+}
+
+@media (max-width: 768px) {
+  .upper-body-part {
+    flex-direction: column-reverse;
+  }
+
+  .upper-body-part {
+    padding-bottom: 30px;
+  }
+}
+@media (min-width: 701px) and (max-width: 900px) {
+
+  .Fashion-img img {
+    width: 95%;
+  }
+}
+
+@media (max-width: 500px) {
+  .upper-body-part {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+
+  .fashion-text {
+    padding-left: 0px;
+  }
+}
+
+@media (min-width: 900px) and (max-width: 1200px) {
+  .fashion-text h1 {
+    font-size: 3rem;
+  }
+  .fashion-text p {
+    font-size: 1.1rem;
+  }
+}
+
+@media (min-width: 425px) and (max-width: 900px) {
+  .fashion-text h1 {
+    font-size: 2rem;
+  }
+  .fashion-text p {
+    font-size: 1rem;
+  }
+  .fashion-text-btn-him {
+    font-size: 15px;
+  }
+  .fashion-text-btn-her {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 425px) {
+  .fashion-text h1 {
+    font-size: 1.6rem;
+  }
+  .fashion-text p {
+    font-size: 0.9rem;
+  }
+  .fashion-text-btn-him,
+  .fashion-text-btn-her {
+    font-size: 12px;
+  }
+}

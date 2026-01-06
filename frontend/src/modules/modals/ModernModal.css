@@ -1,0 +1,94 @@
+/* Cart Page Modal Overlay */
+.cart-modal-overlay {
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  width: 100vw !important;
+  height: 100vh !important;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999999999 !important;
+}
+
+/* Modal Box */
+.cart-modal-box {
+  background: #ffffff;
+  width: 360px;
+  padding: 25px;
+  border-radius: 14px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+  animation: scaleInCartModal 0.25s ease;
+  position: relative !important;
+  z-index: 1000000000 !important;
+}
+
+.cart-modal-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #2e7d32;
+  margin-bottom: 12px;
+}
+
+.cart-modal-message {
+  font-size: 15px;
+  color: #444;
+  margin-bottom: 20px;
+}
+
+/* Buttons */
+.cart-modal-btn,
+.cart-modal-close {
+  width: 100%;
+  padding: 12px;
+  background: #2e7d32;
+  color: white !important;
+  border: none !important;
+  border-radius: 8px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.cart-modal-btn:hover,
+.cart-modal-close:hover {
+  background: #1b5e20;
+}
+
+/* Size / Qty Grids */
+.cart-size-grid,
+.cart-qty-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.cart-size-btn,
+.cart-qty-btn {
+  padding: 12px 0;
+  background: #e8f5e9;
+  border: 1px solid #4caf50 !important;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.cart-size-btn:hover,
+.cart-qty-btn:hover {
+  background: #c8e6c9;
+}
+
+/* Animations */
+@keyframes scaleInCartModal {
+  from {
+    transform: scale(0.85);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

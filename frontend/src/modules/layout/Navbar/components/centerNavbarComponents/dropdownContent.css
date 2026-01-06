@@ -1,0 +1,97 @@
+#cn-center-navbar .cn-dropdown-wrapper {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 8px;
+  z-index: 999;
+}
+
+#cn-center-navbar .cn-dropbtn {
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 8px 6px;
+  position: relative;
+  transition: color 0.22s ease, transform 0.15s ease;
+}
+
+#cn-center-navbar .cn-dropbtn::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -6px;
+  width: 0%;
+  height: 3px;
+  background: linear-gradient(90deg, #ff7a18, #ffb347);
+  border-radius: 10px;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: width 0.35s ease, opacity 0.28s ease;
+}
+
+#cn-center-navbar .cn-dropbtn:hover {
+  color: #ffb347;
+  transform: translateY(-1px);
+}
+#cn-center-navbar .cn-dropbtn:hover::after {
+  width: 75%;
+  opacity: 1;
+}
+
+#cn-center-navbar .cn-dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(10px) scale(0.98);
+  min-width: 200px;
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(8px);
+  border-radius: 12px;
+  padding: 8px;
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.18);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.26s ease, transform 0.28s cubic-bezier(0.2, 0.9, 0.3, 1);
+  transform-origin: top center;
+  margin-top: 6px;
+  z-index: 9999;
+}
+
+#cn-center-navbar .cn-dropdown-wrapper:hover .cn-dropdown-menu,
+#cn-center-navbar .cn-dropdown-wrapper:focus-within .cn-dropdown-menu,
+#cn-center-navbar .cn-dropdown-wrapper.cn-open .cn-dropdown-menu {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+#cn-center-navbar .cn-dropdown-item {
+  display: block;
+  padding: 10px 14px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  color: #0b0b17;
+  transition: background 0.18s ease, transform 0.12s ease, color 0.18s ease;
+}
+
+#cn-center-navbar .cn-dropdown-item:hover {
+  background: rgba(11, 11, 17, 0.06);
+  color: #ff7a18;
+  transform: translateX(6px);
+}
+
+/* Utility font */
+#cn-center-navbar .cn-font {
+  letter-spacing: 0.3px;
+}
+
+/* Small screens */
+@media (max-width: 900px) {
+  #cn-center-navbar .cn-dropdown-menu {
+    min-width: 180px;
+  }
+}

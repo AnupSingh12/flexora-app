@@ -1,0 +1,39 @@
+.editForm {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 10px;
+}
+
+.editRow {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.btnRow {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.cancelBtn {
+  border: 1px solid #3ca7be;
+  background: none;
+  padding: 5px 20px;
+  color: #3ca7be;
+  border-radius: 10px;
+}
+
+.saveBtn {
+  background: #3ca7be;
+  color: white;
+  padding: 5px 20px;
+  border-radius: 10px;
+}

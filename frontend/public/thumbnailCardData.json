@@ -1,0 +1,27 @@
+[
+    {
+        "category": "Footwear",
+        "pageLink":"/Shoes",
+        "imgSrc":"src/assets/photos/Body/Carousel/image2.jpg"
+    },
+    {
+        "category": "Watches",
+        "pageLink":"/Watches",
+        "imgSrc":"src/assets/photos/Body/Carousel/image3.jpg"
+    },
+    {
+        "category": "GenZ",
+        "pageLink":"/GenZ",
+        "imgSrc":"src/assets/photos/Body/Carousel/image4.jpg"
+    },
+    {
+        "category": "Millennial",
+        "pageLink":"/Millennial",
+        "imgSrc":"src/assets/photos/Body/Carousel/image5.jpg"
+    },
+    {
+        "category": "Clothes",
+        "pageLink":"/Clothes",
+        "imgSrc":"src/assets/photos/Body/Carousel/image1.jpg"
+    }
+]

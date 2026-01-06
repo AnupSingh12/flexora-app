@@ -1,0 +1,193 @@
+.wishlist-main-body {
+  margin-bottom: 50px;
+  min-height: 50vh;
+}
+
+.heading {
+  width: 100%;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.wishlist {
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 30px;
+}
+
+.item-teller {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.side-body-content {
+  padding-top: 80px;
+  padding-bottom: 50px;
+}
+.side-body-content::-webkit-scrollbar {
+  display: none;
+}
+.side-body-content-cards {
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 30px;
+}
+
+/* === CARD STYLES START HERE === */
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid var(--light-gray);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-body:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+}
+
+.card-img {
+  width: 100%;
+  cursor: pointer;
+  overflow: hidden; /* Ensures the zoomed image respects the container's border radius */
+}
+
+.card-body img {
+  width: 100%;
+  border-radius: 0; /* Image doesn't need its own radius now */
+  aspect-ratio: 12/10; /* A slightly taller aspect ratio can feel more modern */
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.card-body:hover img {
+  transform: scale(1.05);
+}
+
+.brand-name,
+.brand-color,
+.rating,
+.brand-price-details {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.brand-name {
+  margin-top: 15px;
+}
+
+.brand-color {
+  font-size: 0.9rem;
+  color: var(--gray);
+  margin-top: -5px; /* Tighten up space below brand name */
+}
+
+.rating {
+  margin-top: 5px;
+}
+
+.brand-price-details {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-top: 5px;
+  margin-bottom: 15px;
+}
+
+.remove-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(5px);
+  border: 1px solid var(--light-gray);
+  color: var(--dark);
+  font-size: 14px;
+  cursor: pointer;
+  z-index: 2;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: all 0.3s ease;
+}
+
+.card-body:hover .remove-btn {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.remove-btn:hover {
+  background: var(--danger);
+  color: white;
+  border-color: var(--danger);
+}
+
+.wishlist-add-to-cart-btn {
+  border: none;
+  padding: 14px;
+  width: 100%;
+  margin-top: auto; /* Pushes button to the bottom */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f5f5f5;
+  color: var(--dark);
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.wishlist-add-to-cart-btn:hover {
+  background: var(--primary);
+  color: white;
+}
+
+.price {
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.MRP {
+  font-weight: 500;
+  color: var(--gray);
+  text-decoration: line-through;
+}
+
+.discount {
+  color: var(--success);
+  font-weight: 600;
+}
+
+/* === CARD STYLES END HERE === */
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .side-body-content-cards {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+@media (min-width: 426px) and (max-width: 768px) {
+  .side-body-content-cards {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 320px) and (max-width: 426px) {
+  .side-body-content-cards {
+    grid-template-columns: 1fr;
+  }
+}

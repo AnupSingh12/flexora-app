@@ -1,0 +1,55 @@
+.cardWrapper {
+  display: flex;
+  gap: 15px;
+}
+
+.cardRadio {
+  width: 20px;
+  height: 20px;
+  accent-color: #3ca7be;
+}
+
+.cardContent {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+}
+
+.cardType {
+  padding: 3px 8px;
+  border: 1px solid #0bc506;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  color: #0bc506;
+}
+
+.cardContact {
+  font-size: 0.85rem;
+}
+
+.cardButtons {
+  display: flex;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.removeBtn {
+  border: 1.5px solid #3ca7be;
+  background: none;
+  padding: 5px 15px;
+  border-radius: 10px;
+  color: #3ca7be;
+}
+
+.editBtn {
+  background: #3ca7be;
+  color: white;
+  border: none;
+  padding: 5px 20px;
+  border-radius: 10px;
+}

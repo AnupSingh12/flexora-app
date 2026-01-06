@@ -1,0 +1,173 @@
+
+.carousel .list .item {
+  position: absolute;
+  inset: 0 0 0 0;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+  z-index: 90;
+}
+
+.carousel .list .item.active {
+  opacity: 1;
+  z-index: 91;
+}
+
+.carousel .list .item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.carousel .list .item .content {
+  position: absolute;
+  top: 20%;
+  width: 1140px;
+  max-width: 80%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding-right: 30%;
+  box-sizing: border-box;
+  color: white;
+  text-shadow: 0 5px 10px rgba(0, 0, 0, 0.25);
+}
+
+.carousel .list .item .content .category {
+  font-weight: bold;
+  font-size: 5em;
+  line-height: 1.1;
+}
+
+.carousel .list .item .content .buttons {
+  display: grid;
+  grid-template-columns: repeat(2, 130px);
+  grid-template-rows: 40px;
+  gap: 5px;
+  margin-top: 20px;
+}
+
+.carousel .list .item .content .buttons a {
+  text-decoration: none;
+}
+
+.carousel .list .item .content .buttons a button {
+  border: none;
+  padding: 15px 20px;
+  background-color: #eee;
+  letter-spacing: 3px;
+  border-radius: 10px;
+  font-family: Poppins, sans-serif;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.carousel .list .item .content .buttons a:last-child button {
+  background-color: transparent;
+  color: #eee;
+  border-radius: 10px;
+  border: 1px solid #eee;
+  cursor: pointer;
+}
+
+
+
+
+/* Active content animation */
+.carousel .list .item.active .category,
+.carousel .list .item.active .description,
+.carousel .list .item.active .buttons {
+  transform: translateY(50px);
+  opacity: 0;
+  animation: showContent 0.5s linear forwards;
+}
+
+@keyframes showContent {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.carousel .list .item.active .category {
+  animation-delay: 1.2s;
+}
+.carousel .list .item.active .description {
+  animation-delay: 1.4s;
+}
+.carousel .list .item.active .buttons {
+  animation-delay: 1.6s;
+}
+
+/* next animation */
+.carousel.next .list .item.active img {
+  animation: showImageNext 1s linear 1 forwards;
+  will-change: transform;
+}
+
+@keyframes showImageNext {
+  from {
+    transform: scale(0.2) translateY(120px) translateX(110%);
+  }
+  to {
+    transform: scale(1) translateY(0) translateX(0);
+    border-radius: 0;
+  }
+}
+
+
+
+
+/* prev animation */
+.carousel.prev .list .item:nth-child(2) {
+  z-index: 93;
+}
+
+.carousel.prev .list .item:nth-child(2) img {
+  animation: outImagePrev 0.5s 1s linear 1 forwards;
+}
+
+@keyframes outImagePrev {
+  from {
+    transform: scale(1) translateY(0);
+  }
+  to {
+    transform: scale(0.2) translateY(120px);
+    border-radius: 20px;
+  }
+}
+
+
+
+.carousel.prev .list .item:nth-child(2) .category,
+.carousel.prev .list .item:nth-child(2) .description,
+.carousel.prev .list .item:nth-child(2) .buttons {
+  animation: contentOut 1.5s linear 1 forwards;
+}
+
+@keyframes contentOut {
+  to {
+    transform: translateY(-150px);
+    opacity: 0;
+  }
+}
+
+
+
+.category {
+  z-index: 100;
+}
+.description {
+  z-index: 100;
+}
+
+
+
+/* responsive fix: add px */
+@media screen and (max-width: 678px) {
+  .carousel .list .item .content {
+    padding-right: 0;
+  }
+  .carousel .list .item .content .category {
+    font-size: 30px;
+  }
+}
+

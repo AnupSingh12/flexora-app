@@ -1,0 +1,242 @@
+#overlay {
+  height: 100vh;
+  background-color: black;
+  opacity: 0.7;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+  display: none;
+}
+
+/* ========================================================== */
+/* ================== NEW MODAL STYLES ====================== */
+/* ========================================================== */
+
+.modal-overlay {
+  display: none;
+  position: fixed;
+  z-index: 1001;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.6);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: #fff;
+  margin: auto;
+  padding: 30px 40px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 450px;
+  text-align: center;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+  animation: slide-in 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+@keyframes slide-in {
+  from {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.modal-content h2 {
+  color: var(--dark);
+  margin: 20px 0 10px;
+}
+
+.modal-content p {
+  color: var(--gray);
+  font-size: 1rem;
+  margin-bottom: 25px;
+}
+
+/* --- Icon Container --- */
+.modal-icon-container {
+  margin: 20px auto;
+}
+
+/* --- General Icon Styling --- */
+.modal-icon {
+  width: 80px;
+  height: 80px;
+  position: relative;
+  border-radius: 50%;
+  box-sizing: content-box;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: scale-in 0.5s;
+}
+
+.modal-icon i {
+  font-size: 3rem;
+  color: white;
+}
+
+@keyframes scale-in {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+/* --- Icon Specific Styles --- */
+.success-icon {
+  background-color: var(--success);
+  border: 4px solid var(--success);
+}
+.warning-icon {
+  border: 4px solid var(--warning);
+}
+.danger-icon {
+  background-color: var(--danger);
+  border: 4px solid var(--danger);
+}
+.info-icon {
+  background-color: var(--primary);
+  border: 4px solid var(--primary);
+}
+
+/* --- Animated Warning Icon Details --- */
+.warning-icon .icon-line {
+  background-color: var(--warning);
+  position: absolute;
+  border-radius: 2px;
+}
+.warning-icon .line-main {
+  width: 5px;
+  height: 47px;
+  left: 50%;
+  top: 8px;
+  margin-left: -2.5px;
+  animation: line-main-anim 0.5s 0.2s ease-out both;
+}
+.warning-icon .line-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  left: 50%;
+  bottom: 8px;
+  margin-left: -3.5px;
+  animation: line-dot-anim 0.5s 0.2s ease-out both;
+}
+@keyframes line-main-anim {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+@keyframes line-dot-anim {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+/* --- Button Styles --- */
+#alert-modal-button {
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  min-width: 100px;
+}
+
+#alert-modal-button.btn-success {
+  background-color: var(--success);
+}
+#alert-modal-button.btn-success:hover {
+  background-color: #388e3c;
+}
+
+#alert-modal-button.btn-warning {
+  background-color: var(--warning);
+}
+#alert-modal-button.btn-warning:hover {
+  background-color: #e69100;
+}
+
+#alert-modal-button.btn-danger {
+  background-color: var(--danger);
+}
+#alert-modal-button.btn-danger:hover {
+  background-color: #c62828;
+}
+
+#alert-modal-button.btn-info {
+  background-color: var(--primary);
+}
+#alert-modal-button.btn-info:hover {
+  background-color: var(--primary-dark);
+}
+
+/* --- Coupon Modal Specific Styles --- */
+.coupon-input {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid var(--light-gray);
+  border-radius: 8px;
+  font-size: 1rem;
+  margin-bottom: 20px;
+  transition: border-color 0.3s ease;
+}
+.coupon-input:focus {
+  border-color: var(--primary);
+  outline: none;
+}
+
+.coupon-modal-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.coupon-modal-buttons button {
+  flex-grow: 1;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#apply-coupon-code-btn {
+  background: var(--primary);
+  color: white;
+}
+#apply-coupon-code-btn:hover {
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+}
+#cancel-coupon-btn {
+  background: #f1f1f1;
+  color: var(--dark);
+}
+#cancel-coupon-btn:hover {
+  background: var(--light-gray);
+}

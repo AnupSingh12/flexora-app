@@ -1,0 +1,40 @@
+.addrSectionWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.addrHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.addrAddBtn {
+  border: 1.5px solid #3ca7be;
+  color: #3ca7be;
+  padding: 8px 20px;
+  border-radius: 15px;
+  background: none;
+}
+.addrAddBtn:hover {
+  background: #3ca7be;
+  color: white;
+}
+
+.addrTitle {
+  margin-top: 10px;
+  font-size: 1.2rem;
+}
+
+.addrBody {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.addrCardWrapper {
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.2);
+}

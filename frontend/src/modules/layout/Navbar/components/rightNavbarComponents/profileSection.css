@@ -1,0 +1,123 @@
+/* Root wrapper */
+.ps-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Container */
+.ps-container {
+  position: relative;
+}
+
+/* Avatar */
+.ps-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.ps-avatar:hover {
+  transform: scale(1.06);
+}
+
+.ps-avatar img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* Dropdown */
+.ps-dropdown {
+  position: absolute;
+  top: 48px;
+  right: 0;
+  width: 260px;
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 14px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(12px) scale(0.97);
+  transition: all 0.25s ease;
+  z-index: 9999;
+}
+
+/* Open state */
+.ps-dropdown.ps-open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+}
+
+/* Header */
+.ps-header {
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.ps-header h4 {
+  margin: 0;
+  font-size: 1rem;
+  color: #111;
+}
+
+.ps-header p {
+  margin: 2px 0 0;
+  font-size: 0.85rem;
+  color: #666;
+}
+
+/* Section */
+.ps-section {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+}
+
+/* Links */
+.ps-link {
+  padding: 8px 10px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  color: #333;
+  text-decoration: none;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.ps-link:hover {
+  background: #f4f4f4;
+  transform: translateX(4px);
+}
+
+/* Logout */
+.ps-logout-btn {
+  margin-top: 6px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: none;
+  background: #fff0f0;
+  color: #d9534f;
+  cursor: pointer;
+  text-align: left;
+  font-size: 0.9rem;
+}
+
+.ps-logout-btn:hover {
+  background: #ffe2e2;
+}
+
+#addToCartIcon,
+#wishlistIcon {
+  color: white;
+}
+
+#login-link,
+#signup-link {
+  color: white;
+  text-decoration: none;
+}

@@ -1,0 +1,239 @@
+/* All class names are prefixed with 'signup-' to prevent conflicts */
+
+:root {
+  --primary: #3ca7be;
+  --primary-dark: #5e8ac6;
+  --primary-gradient: linear-gradient(135deg, #3ca7be, #5e8ac6);
+  --light: #ffffff;
+  --dark: #212121;
+  --gray: #757575;
+  --light-gray: #e0e0e0;
+  --background-color: #f4f7f6;
+  --danger: #e53935;
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  --transition: all 0.3s ease-in-out;
+}
+
+/* --- Main Signup Container --- */
+.signup-body {
+  font-family: "Poppins", sans-serif;
+  background-color: var(--background-color);
+  color: var(--dark);
+  line-height: 1.6;
+  display: grid;
+  place-items: center;
+  height: 100vh;
+  padding: 20px;
+}
+
+.signup-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  max-width: 900px;
+  width: 100%;
+  background: var(--light);
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+/* --- Column 1: Branding --- */
+.signup-branding {
+  background: var(--primary-gradient);
+  color: var(--light);
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.signup-branding .branding-content h2 {
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+}
+
+/* --- Column 2: Form --- */
+.signup-form {
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: relative;
+}
+
+.signup-form h1 {
+  font-size: 2rem;
+  color: var(--dark);
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+/* --- Input Fields --- */
+.signup-input-group {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 10px 15px;
+  border: 1px solid var(--light-gray);
+  border-radius: 8px;
+  transition: var(--transition);
+}
+
+.signup-input-group:focus-within {
+  border-color: var(--primary);
+}
+
+.signup-input-icon {
+  height: 18px;
+  width: 18px;
+  opacity: 0.5;
+}
+
+.signup-input-group input {
+  border: none;
+  background: none;
+  outline: none;
+  width: 100%;
+  font-family: "Poppins", sans-serif;
+  font-size: 0.9rem;
+}
+
+.signup-password-toggle {
+  cursor: pointer;
+}
+
+/* REMOVED the problematic .hide { display: none; } rule 
+*/
+
+/* --- Signup Button --- */
+.signup-submit-btn {
+  width: 100%;
+  background: var(--primary-gradient);
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: 0 4px 15px rgba(94, 138, 198, 0.3);
+}
+
+.signup-submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(94, 138, 198, 0.4);
+}
+
+.signup-submit-btn h4 {
+  color: var(--light);
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+/* Unique class names for password icons */
+.signup-password-icon-view,
+.signup-password-icon-hide {
+  width: 15px;
+}
+
+/* --- Divider --- */
+.signup-divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: var(--gray);
+  font-size: 0.8rem;
+}
+
+.signup-divider::before,
+.signup-divider::after {
+  content: "";
+  flex: 1;
+  border-bottom: 1px solid var(--light-gray);
+}
+
+.signup-divider:not(:empty)::before {
+  margin-right: 0.5em;
+}
+
+.signup-divider:not(:empty)::after {
+  margin-left: 0.5em;
+}
+
+/* --- Social & Login Prompt --- */
+.signup-social-login {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.signup-social-icon {
+  height: 35px;
+  width: 35px;
+  transition: var(--transition);
+}
+.signup-social-icon:hover {
+  transform: scale(1.1);
+}
+
+.signup-login-prompt {
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--gray);
+}
+
+.signup-login-btn {
+  text-decoration: none;
+  color: var(--primary-dark);
+  font-weight: 600;
+  margin-left: 5px;
+  transition: var(--transition);
+}
+
+.signup-login-btn:hover {
+  text-decoration: underline;
+}
+
+/* --- Utility & Close Button --- */
+.signup-close-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  opacity: 0.6;
+  transition: var(--transition);
+}
+.signup-close-btn:hover {
+  opacity: 1;
+}
+
+.signup-close-btn img {
+  height: 15px;
+  width: 15px;
+}
+
+/* Error message class, styled like login error message */
+.signup-error-message {
+  color: var(--danger);
+  font-size: 0.8rem;
+  text-align: center;
+  height: 1rem; /* Reserve space to prevent layout shift */
+}
+
+/* --- Responsive Design --- */
+@media (max-width: 768px) {
+  .signup-body {
+    height: auto;
+    padding: 20px;
+  }
+
+  .signup-container {
+    grid-template-columns: 1fr;
+    margin-top: 40%;
+  }
+
+  .signup-branding {
+    display: none; /* Hide branding column on small screens */
+  }
+
+  .signup-form {
+    padding: 30px;
+  }
+}
