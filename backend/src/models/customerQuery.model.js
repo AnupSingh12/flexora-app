@@ -11,17 +11,21 @@ const customerQuerrySchema = new mongoose.Schema({
   userEmail: {
     type: String,
   },
-  querryRegarding: {
+  subject: {
     type: String,
   },
-  querry: {
+  message: {
     type: String,
+  },
+  status: {
+    type: String,
+    default: "view",
   },
 });
 
-const CustomerQuerries = mongoose.model(
+const CustomerQueries = mongoose.model(
   "CustomerQuerries",
   customerQuerrySchema
 );
 
-export { CustomerQuerries };
+export { CustomerQueries };

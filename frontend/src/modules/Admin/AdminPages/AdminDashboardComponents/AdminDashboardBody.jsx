@@ -64,28 +64,7 @@ export default function AdminDashboardBody() {
       });
     }
 
-    // LOAD QUERIES TABLE
-    function loadQueries() {
-      const container = document.getElementById("adb-queries");
-      if (!container) return;
-
-      const data = JSON.parse(localStorage.getItem("adminQuerryData")) || [];
-
-      container.innerHTML = "";
-      data.forEach((q, i) => {
-        container.innerHTML += `
-          <tr>
-            <td>${i + 1}</td>
-            <td>${q.customerName}</td>
-            <td>${q.customerEmail}</td>
-            <td><button class="adb-btn adb-btn-small">View</button></td>
-          </tr>
-        `;
-      });
-    }
-
     loadCustomers();
-    loadQueries();
   }, []);
 
   return (

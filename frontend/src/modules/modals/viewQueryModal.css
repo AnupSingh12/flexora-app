@@ -1,0 +1,154 @@
+/* Overlay */
+.fqm-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+/* Large Modal */
+.fqm-modal-lg {
+  width: 100%;
+  max-width: 760px;
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.35);
+  animation: fqmScaleIn 0.35s ease;
+  overflow: hidden;
+}
+
+/* Header */
+.fqm-header {
+  padding: 22px 28px;
+  background: linear-gradient(135deg, #3ca7be, #2b8da3);
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.fqm-header h3 {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.fqm-close-btn {
+  background: rgba(255, 255, 255, 0.15);
+  border: none;
+  color: #fff;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background 0.2s ease;
+}
+
+.fqm-close-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* Body */
+.fqm-body {
+  padding: 30px;
+}
+
+.fqm-section {
+  margin-bottom: 22px;
+}
+
+.fqm-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: #6b7280;
+  margin-bottom: 8px;
+}
+
+.fqm-box {
+  background: #f8fafc;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 16px 18px;
+  font-size: 15px;
+  color: #111827;
+}
+
+.fqm-message-box {
+  min-height: 140px;
+  line-height: 1.6;
+}
+
+/* Footer */
+.fqm-footer {
+  padding: 20px 28px;
+  border-top: 1px solid #e5e7eb;
+  display: flex;
+  justify-content: flex-end;
+  gap: 14px;
+}
+
+/* Buttons */
+.fqm-btn {
+  padding: 12px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+/* Progress Button */
+.fqm-btn-progress {
+  background: #e0f2f6;
+  color: #0f4c5c;
+}
+
+.fqm-btn-progress:hover {
+  background: #cbeaf1;
+}
+
+/* Resolved Button */
+.fqm-btn-resolved {
+  background: #3ca7be;
+  color: #ffffff;
+}
+
+.fqm-btn-resolved:hover {
+  background: #3294aa;
+}
+
+/* Animation */
+@keyframes fqmScaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .fqm-modal-lg {
+    margin: 0 14px;
+  }
+
+  .fqm-body {
+    padding: 22px;
+  }
+
+  .fqm-footer {
+    flex-direction: column;
+  }
+
+  .fqm-btn {
+    width: 100%;
+  }
+}

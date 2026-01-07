@@ -13,7 +13,7 @@ import { couponRouter } from "./src/routes/coupon.route.js";
 import addressRouter from "./src/routes/address.route.js";
 import paymentRouter from "./src/routes/payment.route.js";
 import orderRouter from "./src/routes/order.route.js";
-import { ContactRouter } from "./src/routes/contact.route.js";
+import { queriesRouter } from "./src/routes/queries.route.js";
 
 mongoose
   .connect(`${process.env.MONGODB_URI}`)
@@ -44,7 +44,7 @@ app.use(couponRouter);
 app.use(addressRouter);
 app.use(paymentRouter);
 app.use(orderRouter);
-app.use(ContactRouter);
+app.use(queriesRouter);
 
 app.get("/api/admin", authMiddleware, adminMiddleware, (req, res) => {
   res.json({ message: "Admin access granted" });
