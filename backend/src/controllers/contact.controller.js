@@ -9,33 +9,13 @@ const uploadCustomerQuerry = asyncHandler(async (req, res) => {
     const formData = req.body;
 
     let querries;
-    //check if user is already exist or have already made a querry
-    querries = await CustomerQuerries.findOne({ userId });
-
-    //if not exist then create one
-    if (!querries) {
-      querries = await CustomerQuerries.create({
-        userId,
-        userQuerry: [
-          {
-            userName: formData.name,
-            userEmail: formData.email,
-            querryRegarding: formData.subject,
-            querry: formData.message,
-          },
-        ],
-      });
-    } else {
-      //if exist the push it to the querry array
-      querries.userQuerry.push({
-        userName: formData.name,
-        userEmail: formData.email,
-        querryRegarding: formData.subject,
-        querry: formData.message,
-      });
-
-      await querries.save();
-    }
+    querries = await CustomerQuerries.create({
+      userId,
+      userName: formData.name,
+      userEmail: formData.email,
+      querryRegarding: formData.subject,
+      querry: formData.message,
+    });
 
     return res
       .status(200)

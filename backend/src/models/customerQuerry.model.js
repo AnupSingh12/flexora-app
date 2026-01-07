@@ -5,22 +5,18 @@ const customerQuerrySchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  userQuerry: [
-    {
-      userName: {
-        type: String,
-      },
-      userEmail: {
-        type: String,
-      },
-      querryRegarding: {
-        type: String,
-      },
-      querry: {
-        type: String,
-      },
-    },
-  ],
+  userName: {
+    type: String,
+  },
+  userEmail: {
+    type: String,
+  },
+  querryRegarding: {
+    type: String,
+  },
+  querry: {
+    type: String,
+  },
 });
 
 const CustomerQuerries = mongoose.model(

@@ -1,7 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import "./profileSection.css";
 import { useState, useEffect, useRef } from "react";
-import profileImage from "../../../../../assets/abcd.jpg";
 
 export default function ProfileSection() {
   const navigate = useNavigate();
