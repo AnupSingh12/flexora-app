@@ -28,7 +28,7 @@ export default function Queries() {
 
   useEffect(() => {
     loadQueries();
-  }, []);
+  }, [openModal]);
 
   function openModal(query) {
     setSelectedQuery(query);
@@ -73,12 +73,21 @@ export default function Queries() {
                       <td>{query.userName}</td>
                       <td>{query.userEmail}</td>
                       <td>
-                        <button
-                          className="adb-btn adb-btn-small"
-                          onClick={() => openModal(query)}
-                        >
-                          View
-                        </button>
+                        {query.status === "view" ? (
+                          <button
+                            className="adb-btn adb-btn-small"
+                            onClick={() => openModal(query)}
+                          >
+                            {query.status}
+                          </button>
+                        ) : (
+                          <button
+                            className="adb-btn-inprog adb-btn-small"
+                            onClick={() => openModal(query)}
+                          >
+                            {query.status}
+                          </button>
+                        )}
                       </td>
                     </tr>
                   );

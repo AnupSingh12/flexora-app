@@ -50,7 +50,7 @@ const updateCustomerQueryStatus = asyncHandler(async (req, res) => {
     const { status, query } = req.body;
     if (status === "in-progress") {
       await CustomerQueries.findByIdAndUpdate(
-        query.id,
+        query._id,
         { status: status },
         { new: true }
       );

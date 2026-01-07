@@ -55,12 +55,16 @@ export default function ViewQueryModal({ query, onClose }) {
         </div>
 
         <div className="fqm-footer">
-          <button
-            className="fqm-btn fqm-btn-progress"
-            onClick={() => updateStatus("in-progress")}
-          >
-            Work In Progress
-          </button>
+          {query.status === "view" ? (
+            <button
+              className="fqm-btn fqm-btn-progress"
+              onClick={() => updateStatus("in-progress")}
+            >
+              Work In Progress
+            </button>
+          ) : (
+            ""
+          )}
 
           <button
             className="fqm-btn fqm-btn-resolved"
