@@ -41,30 +41,6 @@ export default function AdminDashboardBody() {
         sidebar.classList.toggle("adb-sidebar-collapsed");
       });
     }
-
-    // LOAD CUSTOMERS TABLE
-    function loadCustomers() {
-      const container = document.getElementById("adb-customers");
-      if (!container) return;
-
-      const data = JSON.parse(localStorage.getItem("adminData")) || [];
-
-      container.innerHTML = "";
-      data.forEach((user, i) => {
-        container.innerHTML += `
-          <tr>
-            <td>${i + 1}</td>
-            <td>${user.userName}</td>
-            <td>${user.userEmail}</td>
-            <td>+91 ${user.userContact}</td>
-            <td>${user.userOrderDetails.length}</td>
-            <td><button class="adb-btn adb-btn-small">View</button></td>
-          </tr>
-        `;
-      });
-    }
-
-    loadCustomers();
   }, []);
 
   return (

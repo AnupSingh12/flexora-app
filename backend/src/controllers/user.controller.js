@@ -5,7 +5,9 @@ import { User } from "../models/user.model.js";
 import { Address } from "../models/address.model.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { Coupon } from "../models/coupon.model.js";
+import { OrderDetails } from "./../models/orderDetails.model.js";
 import jwt from "jsonwebtoken";
+import { Product } from "../models/products.model.js";
 
 const userAuthStatus = asyncHandler(async (req, res) => {
   try {
@@ -470,6 +472,73 @@ const couponsUsedByUser = asyncHandler(async (req, res) => {
   }
 });
 
+const getAllCutomersInfo = asyncHandler(async (req, res) => {
+  try {
+    const customersInfo = await User.find({ role: "user" });
+    return res
+      .status(200)
+      .json(
+        new ApiResponse(
+          200,
+          customersInfo,
+          "Successfully fetched all the users data"
+        )
+      );
+  } catch (error) {
+    throw new ApiError(
+      error.status || 500,
+      error.message ||
+        "Something went wrong while gettin the customers information"
+    );
+  }
+});
+
+const getCutomersOrderDetails = asyncHandler(async (req, res) => {
+  try {
+    const { customer } = req.body;
+
+    const allDetails = await OrderDetails.findOne({
+      userID: customer._id,
+    });
+
+    const orderDetails = allDetails.orderDetails;
+    const productData = await Promise.all(
+      orderDetails.map(async (entry) => {
+        const items = await Promise.all(
+          entry.items.map(async (item) => {
+            const productDetails = await Product.findById(item.productId);
+
+            return {
+              quantity: item.quantity,
+              size: item.size,
+              product: productDetails,
+            };
+          })
+        );
+        return {
+          orderId: entry._id,
+          items,
+        };
+      })
+    );
+
+    return res
+      .status(200)
+      .json(
+        new ApiResponse(
+          200,
+          productData,
+          "Successfully fetched all the order details"
+        )
+      );
+  } catch (error) {
+    throw new ApiError(
+      error.status || 500,
+      error.message ||
+        "Something went wrong while getting the customer's order details"
+    );
+  }
+});
 export {
   registerUser,
   createAdmin,
@@ -481,4 +550,6 @@ export {
   updateUser,
   userInfo,
   couponsUsedByUser,
+  getAllCutomersInfo,
+  getCutomersOrderDetails,
 };

@@ -41,11 +41,6 @@ export default function AdminDashboardSidebar() {
               <span>Orders</span>
             </li>
 
-            <li className="adb-nav-item" data-target="reports">
-              <i className="fas fa-chart-pie"></i>
-              <span>Reports</span>
-            </li>
-
             <li className="adb-nav-item" data-target="queries">
               <i className="fa-solid fa-clipboard-question"></i>
               <span>Queries</span>

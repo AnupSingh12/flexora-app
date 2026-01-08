@@ -10,6 +10,8 @@ import {
   userInfo,
   loginAdmin,
   couponsUsedByUser,
+  getAllCutomersInfo,
+  getCutomersOrderDetails,
 } from "./../controllers/user.controller.js";
 import { upload } from "../middlewares/multer.middleware.js";
 import { authMiddleware } from "./../middlewares/auth.middleware.js";
@@ -54,5 +56,9 @@ router.route("/api/v1/users/me").get(authMiddleware, userInfo);
 router
   .route("/api/update-user-coupon-value")
   .post(authMiddleware, couponsUsedByUser);
+
+router.route("/api/get-customers-info").get(getAllCutomersInfo);
+
+router.route("/api/get-customers-order-details").post(getCutomersOrderDetails);
 
 export default router;

@@ -28,7 +28,7 @@ export default function Queries() {
 
   useEffect(() => {
     loadQueries();
-  }, [openModal]);
+  }, []);
 
   function openModal(query) {
     setSelectedQuery(query);

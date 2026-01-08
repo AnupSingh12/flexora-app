@@ -1,4 +1,44 @@
+import { useState, useEffect } from "react";
+import ViewCustomerModal from "../../../../../modals/viewCustomerModal.jsx";
+const API_URL = import.meta.env.VITE_API_URL;
+
 export default function Customers() {
+  const [customersInfo, setCustomersInfo] = useState([]);
+  const [selectedCustomer, setSelectedCustomer] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // LOAD CUSTOMERS TABLE
+  async function loadCustomers() {
+    try {
+      const res = await fetch(`${API_URL}/users/api/get-customers-info`, {
+        method: "GET",
+        credentials: "include",
+      });
+
+      if (!res.ok) {
+        console.log("Unable to get the user Data from the API");
+      }
+      const rawData = await res.json();
+      const customersInfoDAta = rawData.data;
+      setCustomersInfo(customersInfoDAta);
+    } catch (error) {
+      console.log("Unable to get the Customer information ");
+    }
+  }
+
+  useEffect(() => {
+    loadCustomers();
+  }, []);
+
+  function openModal(customer) {
+    setIsModalOpen(true);
+    setSelectedCustomer(customer);
+  }
+
+  function closeModal() {
+    setIsModalOpen(false);
+    setSelectedCustomer(null);
+  }
   return (
     <>
       <section id="customers" className="adb-panel">
@@ -29,15 +69,44 @@ export default function Customers() {
                 <th>Name</th>
                 <th>Email</th>
                 <th>Phone</th>
-                <th>Orders</th>
                 <th>Action</th>
               </tr>
             </thead>
 
-            <tbody id="adb-customers"></tbody>
+            <tbody id="adb-customers">
+              {customersInfo.length === 0 ? (
+                <tr>
+                  <td colSpan="6" style={{ textAlign: "center" }}>
+                    No Customers Till now
+                  </td>
+                </tr>
+              ) : (
+                customersInfo.map((customer, index) => {
+                  return (
+                    <tr key={customer._id}>
+                      <td>{index + 1}</td>
+                      <td>{customer.userName}</td>
+                      <td>{customer.email}</td>
+                      <td>+91 {customer.contactNumber}</td>
+                      <td>
+                        <button
+                          className="adb-btn adb-btn-small"
+                          onClick={() => openModal(customer)}
+                        >
+                          View
+                        </button>
+                      </td>
+                    </tr>
+                  );
+                })
+              )}
+            </tbody>
           </table>
         </div>
       </section>
+      {isModalOpen && (
+        <ViewCustomerModal customer={selectedCustomer} onClose={closeModal} />
+      )}
     </>
   );
 }
