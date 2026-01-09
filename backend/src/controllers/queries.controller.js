@@ -48,15 +48,11 @@ const getCustomerQueries = asyncHandler(async (req, res) => {
 const updateCustomerQueryStatus = asyncHandler(async (req, res) => {
   try {
     const { status, query } = req.body;
-    if (status === "in-progress") {
-      await CustomerQueries.findByIdAndUpdate(
-        query._id,
-        { status: status },
-        { new: true }
-      );
-    } else if (status === "resolved") {
-      await CustomerQueries.findByIdAndDelete(query._id);
-    }
+    await CustomerQueries.findByIdAndUpdate(
+      query._id,
+      { status: status },
+      { new: true }
+    );
     return res
       .status(200)
       .json(

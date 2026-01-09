@@ -45,18 +45,7 @@ export default function AdminDashboardSidebar() {
               <i className="fa-solid fa-clipboard-question"></i>
               <span>Queries</span>
             </li>
-
-            <li className="adb-nav-item" data-target="settings">
-              <i className="fas fa-cog"></i>
-              <span>Settings</span>
-            </li>
           </ul>
-
-          <div className="adb-sidebar-footer">
-            <small className="adb-text-muted">
-              Logged in as <strong>admin</strong>
-            </small>
-          </div>
         </div>
       </aside>
     </>

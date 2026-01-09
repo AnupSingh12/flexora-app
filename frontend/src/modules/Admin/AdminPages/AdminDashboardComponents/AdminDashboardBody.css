@@ -154,7 +154,37 @@
   font-weight: 600;
 }
 .adb-btn-inprog {
+  background: rgb(189, 139, 0);
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.adb-btn-resolved {
   background: green;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.adb-btn-hold {
+  background: #fff4e5;
+  color: #d9822b;
+  border: 1px solid #f1c58a;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.adb-btn-deleted {
+  background: red;
   color: white;
   border: none;
   padding: 8px 12px;

@@ -61,7 +61,7 @@ export default function AdminLoginPage() {
           <h1>Admin Login</h1>
 
           <form onSubmit={handleSubmit}>
-            <div className="input-group">
+            <div className="input-group-admin">
               <img className="input-icon" src={UserPng} alt="user-icon" />
               <input
                 id="admin-email"
@@ -73,7 +73,7 @@ export default function AdminLoginPage() {
               />
             </div>
 
-            <div className="input-group">
+            <div className="input-group-admin">
               <img
                 className="input-icon"
                 src={PadlockPng}

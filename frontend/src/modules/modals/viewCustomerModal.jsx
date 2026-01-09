@@ -2,7 +2,11 @@ import { useEffect, useState } from "react";
 import "./viewCustomerModal.css";
 
 const API_URL = import.meta.env.VITE_API_URL;
-export default function ViewCustomerModal({ customer, onClose }) {
+export default function ViewCustomerModal({
+  customer,
+  onClose,
+  onActionComplete,
+}) {
   const [showMoreOrders, setShowMoreOrders] = useState(false);
   const [orders, setOrders] = useState([]);
 
@@ -49,6 +53,8 @@ export default function ViewCustomerModal({ customer, onClose }) {
 
       if (!res.ok) {
         console.log("unable to fetch onHold api");
+      } else {
+        onActionComplete({ ...customer, isActive: "onHold" });
       }
     } catch (error) {
       console.log("Something went wrong while making account status on hold ");
@@ -70,6 +76,8 @@ export default function ViewCustomerModal({ customer, onClose }) {
 
       if (!res.ok) {
         console.log("unable to fetch unHold api");
+      } else {
+        onActionComplete({ ...customer, isActive: "active" });
       }
     } catch (error) {
       console.log("Something went wrong while making account status on hold ");
@@ -91,6 +99,8 @@ export default function ViewCustomerModal({ customer, onClose }) {
 
       if (!res.ok) {
         console.log("unable to fetch Soft Delete api");
+      } else {
+        onActionComplete({ ...customer, isActive: "deleted" });
       }
     } catch (error) {
       console.log(
@@ -114,6 +124,8 @@ export default function ViewCustomerModal({ customer, onClose }) {
 
       if (!res.ok) {
         console.log("unable to fetch permanently delete account api");
+      } else {
+        onActionComplete({ ...customer, isActive: "deleted" });
       }
     } catch (error) {
       console.log(

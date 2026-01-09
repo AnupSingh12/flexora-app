@@ -66,7 +66,7 @@
 }
 
 /* --- Input Fields --- */
-.input-group {
+.input-group-admin {
   display: flex;
   margin: 15px 0px;
   align-items: center;
@@ -77,7 +77,7 @@
   transition: var(--transition);
 }
 
-.input-group:focus-within {
+.input-group-admin:focus-within {
   border-color: var(--primary);
 }
 
@@ -87,7 +87,7 @@
   opacity: 0.5;
 }
 
-.input-group input {
+.input-group-admin input {
   border: none;
   background: none;
   outline: none;

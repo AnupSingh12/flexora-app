@@ -39,6 +39,15 @@ export default function Customers() {
     setIsModalOpen(false);
     setSelectedCustomer(null);
   }
+
+  function handleActionComplete(updatedCustomer) {
+    setCustomersInfo(
+      customersInfo.map((c) =>
+        c._id === updatedCustomer._id ? updatedCustomer : c
+      )
+    );
+    closeModal();
+  }
   return (
     <>
       <section id="customers" className="adb-panel">
@@ -89,12 +98,28 @@ export default function Customers() {
                       <td>{customer.email}</td>
                       <td>+91 {customer.contactNumber}</td>
                       <td>
-                        <button
-                          className="adb-btn adb-btn-small"
-                          onClick={() => openModal(customer)}
-                        >
-                          View
-                        </button>
+                        {customer.isActive === "active" ? (
+                          <button
+                            className="adb-btn adb-btn-small"
+                            onClick={() => openModal(customer)}
+                          >
+                            View
+                          </button>
+                        ) : customer.isActive === "onHold" ? (
+                          <button
+                            className="adb-btn-hold adb-btn-small"
+                            onClick={() => openModal(customer)}
+                          >
+                            On Hold
+                          </button>
+                        ) : (
+                          <button
+                            className="adb-btn-deleted adb-btn-small"
+                            onClick={() => openModal(customer)}
+                          >
+                            Deleted
+                          </button>
+                        )}
                       </td>
                     </tr>
                   );
@@ -105,7 +130,11 @@ export default function Customers() {
         </div>
       </section>
       {isModalOpen && (
-        <ViewCustomerModal customer={selectedCustomer} onClose={closeModal} />
+        <ViewCustomerModal
+          customer={selectedCustomer}
+          onClose={closeModal}
+          onActionComplete={handleActionComplete}
+        />
       )}
     </>
   );

@@ -1,7 +1,7 @@
 import "./viewQueryModal.css";
 
 const API_URL = import.meta.env.VITE_API_URL;
-export default function ViewQueryModal({ query, onClose }) {
+export default function ViewQueryModal({ query, onClose, onActionComplete }) {
   if (!query) return null;
 
   const updateStatus = async (status) => {
@@ -20,6 +20,8 @@ export default function ViewQueryModal({ query, onClose }) {
 
       if (!res.ok) {
         console.log("unable to set the status of query ");
+      } else {
+        onActionComplete({ ...query, status: status });
       }
 
       onClose();

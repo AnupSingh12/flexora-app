@@ -39,6 +39,13 @@ export default function Queries() {
     setSelectedQuery(null);
     setIsModalOpen(false);
   }
+
+  function handleActionComplete(updatedQuery) {
+    setQueries(
+      queries.map((q) => (q._id === updatedQuery._id ? updatedQuery : q))
+    );
+    closeModal();
+  }
   return (
     <>
       <section id="queries" className="adb-panel">
@@ -80,9 +87,16 @@ export default function Queries() {
                           >
                             {query.status}
                           </button>
-                        ) : (
+                        ) : query.status === "in-progress" ? (
                           <button
                             className="adb-btn-inprog adb-btn-small"
+                            onClick={() => openModal(query)}
+                          >
+                            {query.status}
+                          </button>
+                        ) : (
+                          <button
+                            className="adb-btn-resolved adb-btn-small"
                             onClick={() => openModal(query)}
                           >
                             {query.status}
@@ -98,7 +112,11 @@ export default function Queries() {
         </div>
       </section>
       {isModalOpen && (
-        <ViewQueryModal query={selectedQuery} onClose={closeModal} />
+        <ViewQueryModal
+          query={selectedQuery}
+          onClose={closeModal}
+          onActionComplete={handleActionComplete}
+        />
       )}
     </>
   );
