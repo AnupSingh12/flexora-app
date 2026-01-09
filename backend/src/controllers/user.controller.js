@@ -79,7 +79,7 @@ const registerUser = asyncHandler(async (req, res) => {
     $or: [{ userEmail }],
   });
 
-  if (existedUser) {
+  if (existedUser && existedUser.isActive === "active") {
     throw new ApiError(409, "User with email is already exist");
   }
 
@@ -194,7 +194,15 @@ const loginUser = asyncHandler(async (req, res) => {
       throw new ApiError(404, "User not found");
     }
     if (user.role !== "user") {
-      throw new ApiError(404, "the role should be user to login ");
+      throw new ApiError(406, "the role should be user to login ");
+    }
+
+    if (user.isActive === "onHold") {
+      throw new ApiError(403, "This Account is on hold ");
+    }
+
+    if (user.isActive === "deleted") {
+      throw new ApiError(404, "This account is no longer exist");
     }
 
     const isPasswordValid = await user.isPasswordCorrect(password);
@@ -230,8 +238,12 @@ const loginUser = asyncHandler(async (req, res) => {
           "User Logged in SuccessFully"
         )
       );
-  } catch (err) {
-    res.status(500).json({ error: err.message });
+  } catch (error) {
+    if (error instanceof ApiError) {
+      return res.status(error.statusCode).json(error.message);
+    }
+
+    res.status(500).json(new ApiError(500, "Something went wrong while login"));
   }
 });
 

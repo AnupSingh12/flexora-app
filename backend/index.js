@@ -14,6 +14,7 @@ import addressRouter from "./src/routes/address.route.js";
 import paymentRouter from "./src/routes/payment.route.js";
 import orderRouter from "./src/routes/order.route.js";
 import { queriesRouter } from "./src/routes/queries.route.js";
+import { adminRouter } from "./src/routes/adminActions.route.js";
 
 mongoose
   .connect(`${process.env.MONGODB_URI}`)
@@ -45,6 +46,7 @@ app.use(addressRouter);
 app.use(paymentRouter);
 app.use(orderRouter);
 app.use(queriesRouter);
+app.use(adminRouter);
 
 app.get("/api/admin", authMiddleware, adminMiddleware, (req, res) => {
   res.json({ message: "Admin access granted" });

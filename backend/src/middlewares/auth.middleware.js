@@ -34,10 +34,30 @@ export const authMiddleware = asyncHandler(async (req, res, next) => {
 });
 
 // ROLE BASED
-export const adminMiddleware = (req, res, next) => {
-  if (req.user.role !== "admin") {
-    throw new ApiError(403, "Admin access required");
-  }
+export const adminMiddleware = asyncHandler(async (req, res, next) => {
+  try {
+    const token =
+      (await req.cookies?.accessToken) ||
+      req.header("Authorization")?.replace("Bearer", "");
 
-  next();
-};
+    if (!token) {
+      throw new ApiError(401, "Unauthorized request");
+    }
+
+    const decodedToken = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
+
+    const user = await User.findById(decodedToken?._id).select(
+      "-password -refreshToken"
+    );
+    if (user.role !== "admin") {
+      throw new ApiError(403, "Admin access required");
+    }
+
+    next();
+  } catch (error) {
+    throw new ApiError(
+      error.status || 500,
+      error.message || "Something is wrong with Admin access "
+    );
+  }
+});

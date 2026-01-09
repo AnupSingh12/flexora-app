@@ -33,8 +33,16 @@ export default function LoginPage() {
         setMessageColor("green");
         setTimeout(() => navigate("/"), 1200);
       } else {
-        setMessage("wrong password");
-        setMessageColor("red");
+        if (res.status === 403) {
+          setMessage("This account is on hold");
+          setMessageColor("red");
+        } else if (res.status === 404) {
+          setMessage("Invalid user ID");
+          setMessageColor("red");
+        } else if (res.status === 406) {
+          setMessage("This page is for users ⭐");
+          setMessageColor("red");
+        }
       }
     } catch (err) {
       console.log("Server Error", err.message);

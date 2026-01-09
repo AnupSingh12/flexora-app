@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import "./viewCustomerModal.css";
 
 const API_URL = import.meta.env.VITE_API_URL;
-
 export default function ViewCustomerModal({ customer, onClose }) {
   const [showMoreOrders, setShowMoreOrders] = useState(false);
   const [orders, setOrders] = useState([]);
@@ -35,6 +34,93 @@ export default function ViewCustomerModal({ customer, onClose }) {
     }
   }
 
+  async function handleHoldAccount(customer) {
+    try {
+      const res = await fetch(`${API_URL}/api/make-user-account-onHold`, {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          customer,
+        }),
+      });
+
+      if (!res.ok) {
+        console.log("unable to fetch onHold api");
+      }
+    } catch (error) {
+      console.log("Something went wrong while making account status on hold ");
+    }
+  }
+
+  async function handleUnHoldAccount(customer) {
+    try {
+      const res = await fetch(`${API_URL}/api/make-user-account-UnHold`, {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          customer,
+        }),
+      });
+
+      if (!res.ok) {
+        console.log("unable to fetch unHold api");
+      }
+    } catch (error) {
+      console.log("Something went wrong while making account status on hold ");
+    }
+  }
+
+  async function handleSoftDeleteAccount(customer) {
+    try {
+      const res = await fetch(`${API_URL}/api/make-user-account-softDelete`, {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          customer,
+        }),
+      });
+
+      if (!res.ok) {
+        console.log("unable to fetch Soft Delete api");
+      }
+    } catch (error) {
+      console.log(
+        "Something went wrong while making account status on Delete "
+      );
+    }
+  }
+
+  async function handlePermanentDeleteAccount(Customer) {
+    try {
+      const res = await fetch(`${API_URL}/api/delete-user-account-data`, {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          customer,
+        }),
+      });
+
+      if (!res.ok) {
+        console.log("unable to fetch permanently delete account api");
+      }
+    } catch (error) {
+      console.log(
+        "Something went wrong while making account status on delete "
+      );
+    }
+  }
   useEffect(() => {
     loadOrders(customer);
   }, []);
@@ -114,10 +200,41 @@ export default function ViewCustomerModal({ customer, onClose }) {
           )}
         </div>
 
-        <div className="vcm-footer">
-          <button className="vcm-btn hold">Hold Account</button>
-          <button className="vcm-btn delete">Delete Account</button>
-        </div>
+        {customer.isActive === "deleted" ? (
+          <div className="vcm-footer">
+            <button
+              onClick={() => handlePermanentDeleteAccount(customer)}
+              className="vcm-btn delete"
+            >
+              Remove Account data
+            </button>
+          </div>
+        ) : (
+          <div className="vcm-footer">
+            {customer.isActive === "active" ? (
+              <button
+                onClick={() => handleHoldAccount(customer)}
+                className="vcm-btn hold"
+              >
+                Hold Account
+              </button>
+            ) : (
+              <button
+                onClick={() => handleUnHoldAccount(customer)}
+                className="vcm-btn hold"
+              >
+                Unhold Account
+              </button>
+            )}
+
+            <button
+              onClick={() => handleSoftDeleteAccount(customer)}
+              className="vcm-btn delete"
+            >
+              Delete Account
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
