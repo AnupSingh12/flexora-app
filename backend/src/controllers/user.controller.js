@@ -256,7 +256,7 @@ const loginAdmin = asyncHandler(async (req, res) => {
       throw new ApiError(404, "User not found");
     }
     if (user.role !== "admin") {
-      throw new ApiError(404, "the role should be user to login ");
+      throw new ApiError(404, "the role should be admin to login ");
     }
 
     const isPasswordValid = await user.isPasswordCorrect(password);

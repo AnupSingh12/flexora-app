@@ -42,6 +42,9 @@ export default function LoginPage() {
         } else if (res.status === 406) {
           setMessage("This page is for users ⭐");
           setMessageColor("red");
+        } else if (res.status === 401) {
+          setMessage("Wrong Password");
+          setMessageColor("red");
         }
       }
     } catch (err) {

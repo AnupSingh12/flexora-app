@@ -2,6 +2,8 @@ import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { User } from "../models/user.model.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
+import { OrderDataForAdmin } from "../models/orderDataAdmin.model.js";
+import { Product } from "../models/products.model.js";
 
 const holdAccount = asyncHandler(async (req, res) => {
   try {
@@ -107,9 +109,48 @@ const permanentlyDeleteAccountandData = asyncHandler(async (req, res) => {
     );
   }
 });
+
+const getOrderDetails = asyncHandler(async (req, res) => {
+  try {
+    const raworderData = await OrderDataForAdmin.find();
+
+    const orderData = await Promise.all(
+      raworderData.map(async (items, index) => {
+        const user = await User.findById(items.userId);
+        const product = await Product.findById(items.productId);
+
+        return {
+          index,
+          orderId: items._id,
+          userId: items.userId,
+          userName: user ? user.userName : null,
+          productId: items.productId,
+          price: product ? product.price : null,
+          orderStatus: items.orderStatus,
+          quantity: items.quantity ?? null,
+          createdAt: items.addedAt ?? null,
+        };
+      })
+    );
+
+    console.log("-------------orderData---------", orderData);
+    return res
+      .status(200)
+      .json(
+        new ApiResponse(200, orderData, "Successfully fetched all order data")
+      );
+  } catch (error) {
+    throw new ApiError(
+      error.status || 500,
+      error.message ||
+        "Something went wrong while getting order details for admin"
+    );
+  }
+});
 export {
   holdAccount,
   unHoldAccount,
   softDeleteAccount,
   permanentlyDeleteAccountandData,
+  getOrderDetails,
 };

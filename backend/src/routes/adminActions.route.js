@@ -4,6 +4,7 @@ import {
   unHoldAccount,
   softDeleteAccount,
   permanentlyDeleteAccountandData,
+  getOrderDetails,
 } from "../controllers/adminAction.controller.js";
 import { adminMiddleware } from "../middlewares/auth.middleware.js";
 
@@ -24,5 +25,9 @@ adminRouter
 adminRouter
   .route("/api/delete-user-account-data")
   .post(adminMiddleware, permanentlyDeleteAccountandData);
+
+adminRouter
+  .route("/api/order-details-admin")
+  .get(adminMiddleware, getOrderDetails);
 
 export { adminRouter };

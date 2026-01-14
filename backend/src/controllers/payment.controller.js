@@ -1,12 +1,10 @@
 import { Cart } from "../models/cart.model.js";
-import { Address } from "../models/address.model.js";
-import { User } from "../models/user.model.js";
 import { Product } from "../models/products.model.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiError } from "../utils/ApiError.js";
 import { OrderDetails } from "../models/orderDetails.model.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
-
+import { OrderDataForAdmin } from "../models/orderDataAdmin.model.js";
 const placeOrder = asyncHandler(async (req, res) => {
   try {
     const userId = req.user?._id;
@@ -57,6 +55,17 @@ const placeOrder = asyncHandler(async (req, res) => {
     }
 
     const itemsToPush = normalizedItems.filter((i) => i.productId);
+    //create new object data for admin (store per-item docs for admin view)
+    if (itemsToPush.length > 0) {
+      const adminDocs = itemsToPush.map((it) => ({
+        userId: userId.toString(),
+        productId: it.productId,
+        size: it.size,
+        quantity: it.quantity || 1,
+        addedAt: it.addedAt || Date.now(),
+      }));
+      await OrderDataForAdmin.insertMany(adminDocs);
+    }
 
     // Create or update order details
     const order = await OrderDetails.findOneAndUpdate(
