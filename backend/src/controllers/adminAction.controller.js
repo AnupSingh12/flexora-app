@@ -133,7 +133,6 @@ const getOrderDetails = asyncHandler(async (req, res) => {
       })
     );
 
-    console.log("-------------orderData---------", orderData);
     return res
       .status(200)
       .json(

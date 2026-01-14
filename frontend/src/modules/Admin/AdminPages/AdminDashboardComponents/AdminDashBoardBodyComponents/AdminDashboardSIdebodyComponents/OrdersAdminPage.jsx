@@ -13,9 +13,13 @@ export default function OrdersAdminPage() {
 
       if (!res.ok) {
         console.log("Unable to get the order details");
+        const err = await res.text();
+        console.log("order-details error body:", err);
+        return;
       }
 
       const rawData = await res.json();
+      console.log("order-details response:", rawData);
       const orderData = rawData.data;
       setOrderData(orderData);
     } catch (error) {
@@ -45,18 +49,26 @@ export default function OrdersAdminPage() {
             </thead>
 
             <tbody>
-              {orderData.map((data, index) => (
-                <tr key={index}>
-                  <td>{index + 1}</td>
-                  <td>{data.userName}</td>
-                  <td>{data.price}</td>
-                  <td>
-                    <span className="adb-badge adb-badge-pending">
-                      {data.orderStatus}
-                    </span>
+              {orderData && orderData.length > 0 ? (
+                orderData.map((data, index) => (
+                  <tr key={index}>
+                    <td>{index + 1}</td>
+                    <td>{data.userName}</td>
+                    <td>{data.price}</td>
+                    <td>
+                      <span className="adb-badge adb-badge-pending">
+                        {data.orderStatus}
+                      </span>
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan={4} className="adb-text-muted">
+                    No orders found
                   </td>
                 </tr>
-              ))}
+              )}
             </tbody>
           </table>
         </div>

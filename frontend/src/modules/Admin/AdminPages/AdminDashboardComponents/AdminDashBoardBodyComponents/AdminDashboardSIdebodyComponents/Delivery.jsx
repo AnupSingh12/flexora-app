@@ -1,4 +1,42 @@
+import { useState, useEffect } from "react";
+
+const API_URL = import.meta.env.VITE_API_URL;
+
 export default function Delivery() {
+  const [deliveryStatus, setDeliveryStatus] = useState([]);
+  async function loadNumberOfOrders() {
+    try {
+      const res = await fetch(`${API_URL}/api/order-details-admin`, {
+        method: "GET",
+        credentials: "include",
+      });
+
+      if (!res.ok) {
+        console.log("Unable to get the order details");
+      }
+
+      const rawData = await res.json();
+      const orderData = rawData.data;
+      setDeliveryStatus(orderData);
+      console.log("-----orderData ----", orderData);
+    } catch (error) {
+      console.log("Unable to find ");
+    }
+  }
+
+  useEffect(() => {
+    loadNumberOfOrders();
+  }, []);
+
+  const formatDate = (isoString) => {
+    if (!isoString) return "";
+    const d = new Date(isoString);
+    if (Number.isNaN(d.getTime())) return isoString;
+    const day = String(d.getDate()).padStart(2, "0");
+    const month = String(d.getMonth() + 1).padStart(2, "0");
+    const year = d.getFullYear();
+    return `${day}/${month}/${year}`;
+  };
   return (
     <>
       <section id="delivery" className="adb-panel">
@@ -20,33 +58,29 @@ export default function Delivery() {
             </thead>
 
             <tbody>
-              <tr>
-                <td>#1022</td>
-                <td>BlueShip</td>
-                <td>2025-09-30</td>
-                <td>
-                  <span className="adb-badge adb-badge-in-progress">
-                    Out for Delivery
-                  </span>
-                </td>
-                <td>
-                  <button className="adb-btn adb-btn-small">Update</button>
-                </td>
-              </tr>
-
-              <tr>
-                <td>#1018</td>
-                <td>PostFast</td>
-                <td>2025-09-28</td>
-                <td>
-                  <span className="adb-badge adb-badge-delivered">
-                    Delivered
-                  </span>
-                </td>
-                <td>
-                  <button className="adb-btn adb-btn-small">View</button>
-                </td>
-              </tr>
+              {deliveryStatus && deliveryStatus.length > 0 ? (
+                deliveryStatus.map((data, index) => (
+                  <tr key={index}>
+                    <td>#{index + 1}</td>
+                    <td>BlueShip</td>
+                    <td>{formatDate(data.createdAt)}</td>
+                    <td>
+                      <span className="adb-badge adb-badge-in-progress">
+                        {data.orderStatus}
+                      </span>
+                    </td>
+                    <td>
+                      <button className="adb-btn adb-btn-small">Update</button>
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan={5} className="adb-text-muted">
+                    No deliveries found
+                  </td>
+                </tr>
+              )}
             </tbody>
           </table>
         </div>
