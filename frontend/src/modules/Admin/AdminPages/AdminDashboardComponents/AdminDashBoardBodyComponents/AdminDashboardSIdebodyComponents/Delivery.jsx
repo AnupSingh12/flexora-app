@@ -1,9 +1,13 @@
 import { useState, useEffect } from "react";
+import ViewDeliveryStatusModal from "../../../../../modals/viewDeliveryStatusModal.jsx";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
 export default function Delivery() {
   const [deliveryStatus, setDeliveryStatus] = useState([]);
+  const [selectedStatus, setSelectedStatus] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   async function loadNumberOfOrders() {
     try {
       const res = await fetch(`${API_URL}/api/order-details-admin`, {
@@ -18,7 +22,6 @@ export default function Delivery() {
       const rawData = await res.json();
       const orderData = rawData.data;
       setDeliveryStatus(orderData);
-      console.log("-----orderData ----", orderData);
     } catch (error) {
       console.log("Unable to find ");
     }
@@ -27,6 +30,23 @@ export default function Delivery() {
   useEffect(() => {
     loadNumberOfOrders();
   }, []);
+
+  function openModal(status) {
+    setSelectedStatus(status);
+    setIsModalOpen(true);
+  }
+
+  function closeModal() {
+    setSelectedStatus(null);
+    setIsModalOpen(false);
+  }
+
+  function handleActionComplete(updatedQuery) {
+    setQueries(
+      queries.map((q) => (q._id === updatedQuery._id ? updatedQuery : q))
+    );
+    closeModal();
+  }
 
   const formatDate = (isoString) => {
     if (!isoString) return "";
@@ -70,7 +90,12 @@ export default function Delivery() {
                       </span>
                     </td>
                     <td>
-                      <button className="adb-btn adb-btn-small">Update</button>
+                      <button
+                        onClick={() => openModal(data)}
+                        className="adb-btn adb-btn-small"
+                      >
+                        Update
+                      </button>
                     </td>
                   </tr>
                 ))
@@ -85,6 +110,13 @@ export default function Delivery() {
           </table>
         </div>
       </section>
+      {isModalOpen && (
+        <ViewDeliveryStatusModal
+          deliveryStatus={selectedStatus}
+          onClose={closeModal}
+          onActionComplete={handleActionComplete}
+        />
+      )}
     </>
   );
 }

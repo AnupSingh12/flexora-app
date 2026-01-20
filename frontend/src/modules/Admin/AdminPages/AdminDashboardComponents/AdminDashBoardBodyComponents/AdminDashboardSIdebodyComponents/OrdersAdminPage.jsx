@@ -19,7 +19,6 @@ export default function OrdersAdminPage() {
       }
 
       const rawData = await res.json();
-      console.log("order-details response:", rawData);
       const orderData = rawData.data;
       setOrderData(orderData);
     } catch (error) {

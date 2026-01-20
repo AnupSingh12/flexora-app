@@ -1,0 +1,149 @@
+/* Overlay */
+.dsm-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+/* Large Modal */
+.dsm-modal-lg {
+  width: 100%;
+  max-width: 760px;
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.35);
+  animation: fqmScaleIn 0.35s ease;
+  overflow: hidden;
+}
+
+/* Header */
+.dsm-header {
+  padding: 22px 28px;
+  background: linear-gradient(135deg, #3ca7be, #2b8da3);
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dsm-header h3 {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.dsm-close-btn {
+  background: rgba(255, 255, 255, 0.15);
+  border: none;
+  color: #fff;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background 0.2s ease;
+}
+
+.dsm-close-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.dsm-section {
+  padding: 22px 26px;
+  border-bottom: 1px solid #e9eef2;
+}
+
+.dsm-section:last-child {
+  border-bottom: none;
+}
+
+.dsm-section h3 {
+  margin-bottom: 14px;
+  color: #3ca7be;
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+/* ================================
+   CUSTOMER GRID
+================================ */
+.dsm-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px 20px;
+  font-size: 0.95rem;
+}
+
+.dsm-grid strong {
+  color: #2f2f2f;
+}
+
+/* Footer */
+.dsm-footer {
+  padding: 20px 28px;
+  border-top: 1px solid #e5e7eb;
+  display: flex;
+  justify-content: flex-end;
+  gap: 14px;
+}
+
+/* Buttons */
+.dsm-btn {
+  padding: 12px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+/* Progress Button */
+.dsm-btn-progress {
+  background: #e0f2f6;
+  color: #0f4c5c;
+}
+
+.dsm-btn-progress:hover {
+  background: #cbeaf1;
+}
+
+/* Resolved Button */
+.dsm-btn-resolved {
+  background: #3ca7be;
+  color: #ffffff;
+}
+
+.dsm-btn-resolved:hover {
+  background: #3294aa;
+}
+
+/* Animation */
+@keyframes fqmScaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .dsm-modal-lg {
+    margin: 0 14px;
+  }
+
+  .dsm-footer {
+    flex-direction: column;
+  }
+
+  .dsm-btn {
+    width: 100%;
+  }
+}

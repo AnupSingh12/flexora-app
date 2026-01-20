@@ -14,6 +14,9 @@ const orderDataSchema = new mongoose.Schema([
     quantity: {
       type: String,
     },
+    orderId: {
+      type: String,
+    },
     orderStatus: {
       type: String,
       default: "pending",
