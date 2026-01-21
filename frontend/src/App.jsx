@@ -80,7 +80,6 @@ function App() {
           <Route path="/AdminLogin" element={<AdminLoginPage />}></Route>
           <Route path="/auth/register" element={<AdminSignup />}></Route>
         </Routes>
-
         <Routes>
           <Route path="/AdminDashboard" element={<AdminDashboard />}></Route>
         </Routes>

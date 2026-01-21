@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./Stocks.css";
 
+const API_URL = import.meta.env.VITE_API_URL;
 export default function Stocks() {
+  const [productDetails, setProductDetails] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const [form, setForm] = useState({
     images: "",
@@ -22,6 +24,25 @@ export default function Stocks() {
   const [thumbnailFile, setThumbnailFile] = useState(null);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState(null);
+
+  async function getProductDetails() {
+    try {
+      const res = await fetch(`${API_URL}/api/products`, {
+        method: "GET",
+        credentials: "include",
+      });
+
+      const rawData = await res.json();
+      const productData = rawData.data;
+      setProductDetails(productData);
+    } catch (error) {
+      console.log("Error while getting the items details :", error);
+    }
+  }
+
+  useEffect(() => {
+    getProductDetails();
+  }, []);
 
   function openModal() {
     setMessage(null);
@@ -219,21 +240,29 @@ export default function Stocks() {
                 <th>Category</th>
                 <th>Stock</th>
                 <th>MRP</th>
-                <th>Action</th>
               </tr>
             </thead>
 
             <tbody>
-              <tr>
-                <td>CL-001</td>
-                <td>Black Tee (M)</td>
-                <td>Clothes</td>
-                <td>24</td>
-                <td>₹499</td>
-                <td>
-                  <button className="adb-btn adb-btn-small">Edit</button>
-                </td>
-              </tr>
+              {productDetails.map((item, index) => {
+                return (
+                  <tr key={index}>
+                    <td>{item.sku}</td>
+                    <td>{item.title}</td>
+                    <td>{item.category}</td>
+                    <td>{item.stock}</td>
+                    <td>{item.price}</td>
+                    <td>
+                      <button
+                        onClick={() => openModal(index)}
+                        className="adb-btn adb-btn-small"
+                      >
+                        Edit
+                      </button>
+                    </td>
+                  </tr>
+                );
+              })}
 
               <tr>
                 <td>SH-101</td>
