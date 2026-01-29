@@ -1,0 +1,190 @@
+.aps-container {
+  width: 100%;
+  max-width: 980px;
+  margin: 100px auto;
+  padding: 18px;
+}
+
+.aps-card {
+  background: linear-gradient(180deg, #ffffff, #fbfdff);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 8px 28px rgba(16, 24, 40, 0.08);
+  border: 1px solid rgba(15, 23, 42, 0.03);
+}
+
+.aps-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.aps-title {
+  margin: 0;
+  color: var(--dark);
+  font-size: 1.15rem;
+}
+
+.aps-edit-btn {
+  background: var(--primary);
+  color: #fff;
+  border: 0;
+  padding: 8px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(60, 167, 190, 0.14);
+}
+
+.aps-body {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 20px;
+  align-items: start;
+}
+
+.aps-avatar-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.aps-avatar-lg {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 14px;
+  border: 2px solid var(--light-gray);
+}
+
+.aps-fields {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px 22px;
+}
+
+.aps-field {
+  display: flex;
+  flex-direction: column;
+}
+
+.aps-label {
+  font-size: 0.85rem;
+  color: var(--gray);
+  margin-bottom: 6px;
+}
+
+.aps-value {
+  background: var(--light);
+  padding: 10px 12px;
+  border-radius: 10px;
+  color: var(--dark);
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+}
+
+.aps-immutable {
+  opacity: 0.95;
+}
+
+.aps-input {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--light-gray);
+  outline: none;
+  font-size: 0.95rem;
+}
+
+.aps-avatar-sm {
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.aps-actions {
+  margin-top: 18px;
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+.aps-btn {
+  padding: 10px 16px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.aps-btn-cancel {
+  background: transparent;
+  color: var(--gray);
+  border: 1px solid var(--light-gray);
+}
+
+.aps-btn-primary {
+  background: var(--primary-gradient);
+  color: #fff;
+  border: none;
+  box-shadow: 0 8px 20px rgba(60, 167, 190, 0.12);
+}
+
+.aps-confirm-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(3, 10, 18, 0.45);
+  z-index: 9999;
+}
+
+.aps-confirm {
+  background: #fff;
+  padding: 20px 22px;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(2, 6, 23, 0.12);
+  width: 92%;
+  max-width: 460px;
+  text-align: center;
+}
+
+.aps-confirm-txt {
+  margin: 0 0 16px 0;
+  color: var(--dark);
+  font-weight: 500;
+}
+
+.aps-confirm-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+@media (max-width: 880px) {
+  .aps-body {
+    grid-template-columns: 1fr;
+  }
+  .aps-fields {
+    grid-template-columns: 1fr;
+  }
+  .aps-avatar-lg {
+    width: 120px;
+    height: 120px;
+  }
+}
+
+@media (max-width: 420px) {
+  .aps-card {
+    padding: 14px;
+  }
+  .aps-edit-btn {
+    padding: 8px 10px;
+  }
+  .aps-btn {
+    padding: 8px 12px;
+  }
+}

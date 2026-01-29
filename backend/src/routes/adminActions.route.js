@@ -5,6 +5,7 @@ import {
   softDeleteAccount,
   permanentlyDeleteAccountandData,
   getOrderDetails,
+  getAdimData,
 } from "../controllers/adminAction.controller.js";
 import { adminMiddleware } from "../middlewares/auth.middleware.js";
 
@@ -29,5 +30,7 @@ adminRouter
 adminRouter
   .route("/api/order-details-admin")
   .get(adminMiddleware, getOrderDetails);
+
+adminRouter.route("/api/admin-data").get(getAdimData);
 
 export { adminRouter };

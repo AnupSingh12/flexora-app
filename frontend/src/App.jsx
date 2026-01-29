@@ -31,6 +31,7 @@ import MenSection from "./modules/Pages/Male/MaleProducts.jsx";
 import { Orders } from "./modules/layout/Orders/Orders.jsx";
 import EditProfile from "./modules/layout/EditProfileSection/EditProfileSection.jsx";
 import ContactUs from "./modules/layout/ContactUs/ContactUs.jsx";
+import AdminProfileSection from "./modules/Admin/AdminPages/AdminProfileSection.jsx";
 function App() {
   return (
     <>
@@ -82,6 +83,10 @@ function App() {
         </Routes>
         <Routes>
           <Route path="/AdminDashboard" element={<AdminDashboard />}></Route>
+          <Route
+            path="/Admin-Profile"
+            element={<AdminProfileSection />}
+          ></Route>
         </Routes>
         <Routes>
           <Route path="/UserData" element={<UserData />}></Route>

@@ -23,7 +23,7 @@ export default function ViewCustomerModal({
           body: JSON.stringify({
             customer,
           }),
-        }
+        },
       );
 
       if (!res.ok) {
@@ -31,7 +31,6 @@ export default function ViewCustomerModal({
       }
       const rawData = await res.json();
       const customersOrderData = rawData.data;
-      console.log("---order data ---", customersOrderData);
       setOrders(customersOrderData[0].items);
     } catch (error) {
       console.log("Error while getting the cutomer's order details");
@@ -104,7 +103,7 @@ export default function ViewCustomerModal({
       }
     } catch (error) {
       console.log(
-        "Something went wrong while making account status on Delete "
+        "Something went wrong while making account status on Delete ",
       );
     }
   }
@@ -129,7 +128,7 @@ export default function ViewCustomerModal({
       }
     } catch (error) {
       console.log(
-        "Something went wrong while making account status on delete "
+        "Something went wrong while making account status on delete ",
       );
     }
   }

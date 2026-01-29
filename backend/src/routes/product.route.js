@@ -4,6 +4,7 @@ import {
   createProduct,
   getReviews,
   addReviews,
+  updateProduct,
 } from "../controllers/product.controller.js";
 import {
   authMiddleware,
@@ -30,6 +31,9 @@ productRouter.route("/api/products").get(getAllProducts);
 productRouter
   .route("/api/admin/products")
   .post(authMiddleware, adminMiddleware, createProduct);
+productRouter
+  .route("/api/admin/products/:productId")
+  .put(authMiddleware, adminMiddleware, updateProduct);
 // wishlist product routes
 productRouter
   .route("/api/wishlist-products")

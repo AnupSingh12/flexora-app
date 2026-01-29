@@ -75,7 +75,7 @@ const getReviews = asyncHandler(async (req, res) => {
   } catch (error) {
     throw new ApiError(
       error.status || 500,
-      error.message || "Something went wrong"
+      error.message || "Something went wrong",
     );
   }
 });
@@ -101,7 +101,7 @@ const addReviews = asyncHandler(async (req, res) => {
     }
     // Prevent multiple reviews by same user
     const alreadyReviewed = product.reviews.find(
-      (r) => r.userId.toString() === userId.toString()
+      (r) => r.userId.toString() === userId.toString(),
     );
 
     if (alreadyReviewed) {
@@ -135,9 +135,57 @@ const addReviews = asyncHandler(async (req, res) => {
   } catch (error) {
     throw new ApiError(
       error.status || 500,
-      error.message || "message something went wrong"
+      error.message || "message something went wrong",
     );
   }
 });
 
-export { getAllProducts, createProduct, getReviews, addReviews };
+const updateProduct = asyncHandler(async (req, res) => {
+  try {
+    const { productId } = req.params;
+    const payload = req.body;
+
+    if (!productId) {
+      throw new ApiError(400, "Product ID is required");
+    }
+
+    // Build update object with only provided fields
+    const updateData = {};
+    if (payload.title) updateData.title = payload.title;
+    if (payload.gender) updateData.gender = payload.gender;
+    if (payload.description) updateData.description = payload.description;
+    if (payload.brand) updateData.brand = payload.brand;
+    if (payload.category) updateData.category = payload.category;
+    if (payload.price !== undefined) updateData.price = Number(payload.price);
+    if (payload.discountPercentage !== undefined)
+      updateData.discountPercentage = payload.discountPercentage;
+    if (payload.stock !== undefined) updateData.stock = Number(payload.stock);
+    if (payload.color) updateData.color = payload.color;
+    if (payload.sku) updateData.sku = payload.sku;
+    if (payload.productType) updateData.productType = payload.productType;
+    if (Array.isArray(payload.sizes)) updateData.sizes = payload.sizes;
+    if (payload.thumbnail) updateData.thumbnail = payload.thumbnail;
+    if (Array.isArray(payload.images)) updateData.images = payload.images;
+
+    const updatedProduct = await Product.findByIdAndUpdate(
+      productId,
+      updateData,
+      { new: true, runValidators: true },
+    );
+
+    if (!updatedProduct) {
+      throw new ApiError(404, "Product not found");
+    }
+
+    return res
+      .status(200)
+      .json(
+        new ApiResponse(200, updatedProduct, "Product updated successfully"),
+      );
+  } catch (error) {
+    if (error.statusCode) throw error;
+    throw new ApiError(500, error.message || "Failed to update product");
+  }
+});
+
+export { getAllProducts, createProduct, getReviews, addReviews, updateProduct };

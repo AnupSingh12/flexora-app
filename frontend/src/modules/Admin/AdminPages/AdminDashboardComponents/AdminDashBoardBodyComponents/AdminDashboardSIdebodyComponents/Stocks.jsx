@@ -24,6 +24,9 @@ export default function Stocks() {
   const [thumbnailFile, setThumbnailFile] = useState(null);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState(null);
+  const [editingProductId, setEditingProductId] = useState(null);
+  const [isEditMode, setIsEditMode] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState("");
 
   async function getProductDetails() {
     try {
@@ -47,9 +50,61 @@ export default function Stocks() {
   function openModal() {
     setMessage(null);
     setIsOpen(true);
+    setIsEditMode(false);
+    setEditingProductId(null);
   }
+
+  function openEditModal(index) {
+    const product = productDetails[index];
+    setEditingProductId(product._id);
+    setForm({
+      title: product.title || "",
+      brand: product.brand || "",
+      category: product.category || "",
+      gender: product.gender || "",
+      mrp: product.price || "",
+      discountPercentage: product.discountPercentage || "",
+      description: product.description || "",
+      color: product.color || "",
+      sizes: (product.sizes || []).join(", "),
+      productType: product.productType || "",
+      sku: product.sku || "",
+      stock: product.stock || "",
+    });
+    setFiles([]);
+    setThumbnailFile(null);
+    setMessage(null);
+    setIsOpen(true);
+    setIsEditMode(true);
+  }
+
   function closeModal() {
     setIsOpen(false);
+    setEditingProductId(null);
+    setIsEditMode(false);
+  }
+
+  function handleCategoryFilter(e) {
+    setSelectedCategory(e.target.value);
+  }
+
+  function getFilteredProducts() {
+    if (!selectedCategory) {
+      return productDetails;
+    }
+    return productDetails.filter(
+      (product) =>
+        product.category?.toLowerCase() === selectedCategory.toLowerCase(),
+    );
+  }
+
+  function getUniqueCategories() {
+    const categories = new Set(
+      productDetails
+        .map((product) => product.category)
+        .filter((category) => category && category.trim() !== ""),
+    );
+    return Array.from(categories).sort();
   }
 
   function onChange(e) {
@@ -72,9 +127,6 @@ export default function Stocks() {
     setMessage(null);
 
     try {
-      /* ===========================
-       1. UPLOAD THUMBNAIL IMAGE
-    ============================ */
       let thumbnailUrl = "";
 
       if (thumbnailFile) {
@@ -87,7 +139,7 @@ export default function Stocks() {
             method: "POST",
             credentials: "include",
             body: thumbFd,
-          }
+          },
         );
 
         if (!thumbRes.ok) {
@@ -95,15 +147,11 @@ export default function Stocks() {
           throw new Error(errTxt || "Thumbnail upload failed");
         }
 
-        // ✅ FIX: parse JSON response
         const thumbJson = await thumbRes.json();
 
         thumbnailUrl = thumbJson?.data?.images?.[0] || "";
       }
 
-      /* ===========================
-       2. UPLOAD PRODUCT IMAGES
-    ============================ */
       let uploadedImages = [];
 
       if (files && files.length > 0) {
@@ -116,7 +164,7 @@ export default function Stocks() {
             method: "POST",
             credentials: "include",
             body: fd,
-          }
+          },
         );
 
         if (!uploadRes.ok) {
@@ -128,16 +176,10 @@ export default function Stocks() {
         uploadedImages = uploadJson?.data?.images || [];
       }
 
-      /* ===========================
-       3. FALLBACK THUMBNAIL
-    ============================ */
       if (!thumbnailUrl && uploadedImages.length > 0) {
         thumbnailUrl = uploadedImages[0];
       }
 
-      /* ===========================
-       4. CREATE PRODUCT PAYLOAD
-    ============================ */
       const payload = {
         title: form.title,
         brand: form.brand,
@@ -147,8 +189,6 @@ export default function Stocks() {
         price: Number(form.mrp) || 0,
         discountPercentage: Number(form.discountPercentage) || 0,
         stock: Number(form.stock) || 0,
-        thumbnail: thumbnailUrl,
-        images: uploadedImages,
         sku: form.sku,
         productType: form.productType,
         sizes: form.sizes
@@ -158,46 +198,74 @@ export default function Stocks() {
         color: form.color,
       };
 
-      /* ===========================
-       5. CREATE PRODUCT API
-    ============================ */
-      const res = await fetch("http://localhost:3000/api/admin/products", {
-        method: "POST",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-      });
+      // Only add images if they were updated
+      if (thumbnailUrl) {
+        payload.thumbnail = thumbnailUrl;
+      }
+      if (uploadedImages.length > 0) {
+        payload.images = uploadedImages;
+      }
+
+      let res;
+      if (isEditMode && editingProductId) {
+        // UPDATE PRODUCT
+        res = await fetch(
+          `http://localhost:3000/api/admin/products/${editingProductId}`,
+          {
+            method: "PUT",
+            credentials: "include",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(payload),
+          },
+        );
+      } else {
+        // CREATE PRODUCT
+        res = await fetch("http://localhost:3000/api/admin/products", {
+          method: "POST",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payload),
+        });
+      }
 
       const data = await res.json();
       if (!res.ok) {
-        throw new Error(data.message || "Failed to add product");
+        throw new Error(data.message || "Failed to save product");
       }
 
-      /* ===========================
-       6. SUCCESS STATE RESET
-    ============================ */
-      setMessage({ type: "success", text: "Product added successfully" });
+      const successMsg = isEditMode
+        ? "Product updated successfully"
+        : "Product added successfully";
+      setMessage({ type: "success", text: successMsg });
 
-      setForm({
-        title: "",
-        brand: "",
-        category: "",
-        gender: "",
-        mrp: "",
-        discountPercentage: "",
-        description: "",
-        color: "",
-        sizes: "",
-        productType: "",
-        sku: "",
-        stock: "",
-      });
+      // Refresh product list
+      getProductDetails();
 
-      setFiles([]);
-      setThumbnailFile(null);
-      setIsOpen(false);
+      setTimeout(() => {
+        setForm({
+          title: "",
+          brand: "",
+          category: "",
+          gender: "",
+          mrp: "",
+          discountPercentage: "",
+          description: "",
+          color: "",
+          sizes: "",
+          productType: "",
+          sku: "",
+          stock: "",
+        });
+        setFiles([]);
+        setThumbnailFile(null);
+        setIsOpen(false);
+        setEditingProductId(null);
+        setIsEditMode(false);
+      }, 1500);
     } catch (err) {
       console.error(err);
       setMessage({
@@ -219,13 +287,18 @@ export default function Stocks() {
 
         <div className="adb-card">
           <div className="adb-card-actions">
-            <select id="filterCategory" className="adb-input">
+            <select
+              id="filterCategory"
+              className="adb-input"
+              value={selectedCategory}
+              onChange={handleCategoryFilter}
+            >
               <option value="">All categories</option>
-              <option>Clothes</option>
-              <option>Shoes</option>
-              <option>Watches</option>
-              <option>GenZ</option>
-              <option>Millennial</option>
+              {getUniqueCategories().map((category) => (
+                <option key={category} value={category}>
+                  {category}
+                </option>
+              ))}
             </select>
             <button className="adb-btn" onClick={openModal} type="button">
               Add Item
@@ -244,7 +317,7 @@ export default function Stocks() {
             </thead>
 
             <tbody>
-              {productDetails.map((item, index) => {
+              {getFilteredProducts().map((item, index) => {
                 return (
                   <tr key={index}>
                     <td>{item.sku}</td>
@@ -254,7 +327,7 @@ export default function Stocks() {
                     <td>{item.price}</td>
                     <td>
                       <button
-                        onClick={() => openModal(index)}
+                        onClick={() => openEditModal(index)}
                         className="adb-btn adb-btn-small"
                       >
                         Edit
@@ -263,6 +336,18 @@ export default function Stocks() {
                   </tr>
                 );
               })}
+
+              {getFilteredProducts().length === 0 && (
+                <tr>
+                  <td
+                    colSpan="6"
+                    style={{ textAlign: "center", padding: "20px" }}
+                  >
+                    No products found
+                    {selectedCategory ? " in this category" : ""}
+                  </td>
+                </tr>
+              )}
 
               <tr>
                 <td>SH-101</td>
@@ -286,7 +371,7 @@ export default function Stocks() {
               onClick={(e) => e.stopPropagation()}
               onSubmit={handleSubmit}
             >
-              <h3>Add New Product</h3>
+              <h3>{isEditMode ? "Edit Product" : "Add New Product"}</h3>
               {message && (
                 <div
                   className={`adb-modal-message ${
@@ -494,7 +579,13 @@ export default function Stocks() {
                   className="adb-modal-btn adb-modal-btn-primary"
                   disabled={loading}
                 >
-                  {loading ? "Adding…" : "Add Product"}
+                  {loading
+                    ? isEditMode
+                      ? "Updating…"
+                      : "Adding…"
+                    : isEditMode
+                      ? "Update Product"
+                      : "Add Product"}
                 </button>
               </div>
             </form>

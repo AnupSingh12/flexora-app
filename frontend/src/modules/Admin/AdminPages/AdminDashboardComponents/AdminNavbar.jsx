@@ -102,9 +102,11 @@ export default function AdminNavbar() {
                 </div>
 
                 <div className="an-dropdown-body">
-                  <p id="profile-btn">
-                    <i className="fas fa-user-circle"></i> Profile
-                  </p>
+                  <Link to="/Admin-Profile">
+                    <p id="profile-btn">
+                      <i className="fas fa-user-circle"></i> Profile
+                    </p>
+                  </Link>
 
                   <div onClick={logout}>
                     <p id="logout-btn" className="an-logout-btn">

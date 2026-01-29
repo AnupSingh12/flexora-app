@@ -5,6 +5,20 @@ import { asyncHandler } from "../utils/asyncHandler.js";
 import { OrderDataForAdmin } from "../models/orderDataAdmin.model.js";
 import { Product } from "../models/products.model.js";
 
+const getAdimData = asyncHandler(async (req, res) => {
+  try {
+    const user = await User.findOne({ role: "admin" });
+    return res
+      .status(200)
+      .json(new ApiResponse(200, user, "Successfully get the admin Data"));
+  } catch (error) {
+    throw new ApiError(
+      error.status || 500,
+      error.message || "Something went wrong while getting admin data",
+    );
+  }
+});
+
 const holdAccount = asyncHandler(async (req, res) => {
   try {
     const { customer } = req.body;
@@ -21,14 +35,14 @@ const holdAccount = asyncHandler(async (req, res) => {
         new ApiResponse(
           200,
           null,
-          "Successfully Updated the Status of Customer"
-        )
+          "Successfully Updated the Status of Customer",
+        ),
       );
   } catch (error) {
     throw new ApiError(
       error.status || 500,
       error.message ||
-        "Something went wrong while changing the account status to onHold"
+        "Something went wrong while changing the account status to onHold",
     );
   }
 });
@@ -49,14 +63,14 @@ const unHoldAccount = asyncHandler(async (req, res) => {
         new ApiResponse(
           200,
           null,
-          "Successfully Updated the Status of Customer"
-        )
+          "Successfully Updated the Status of Customer",
+        ),
       );
   } catch (error) {
     throw new ApiError(
       error.status || 500,
       error.message ||
-        "Something went wrong while changing the account status to Unhold"
+        "Something went wrong while changing the account status to Unhold",
     );
   }
 });
@@ -77,14 +91,14 @@ const softDeleteAccount = asyncHandler(async (req, res) => {
         new ApiResponse(
           200,
           null,
-          "Successfully Updated the Status of Customer"
-        )
+          "Successfully Updated the Status of Customer",
+        ),
       );
   } catch (error) {
     throw new ApiError(
       error.status || 500,
       error.message ||
-        "Something went wrong while changing the account status to Unhold"
+        "Something went wrong while changing the account status to Unhold",
     );
   }
 });
@@ -105,7 +119,7 @@ const permanentlyDeleteAccountandData = asyncHandler(async (req, res) => {
   } catch (error) {
     throw new ApiError(
       error.status || 500,
-      error.message || "Something went wrong while deleting cusotmer data"
+      error.message || "Something went wrong while deleting cusotmer data",
     );
   }
 });
@@ -130,19 +144,19 @@ const getOrderDetails = asyncHandler(async (req, res) => {
           quantity: items.quantity ?? null,
           createdAt: items.addedAt ?? null,
         };
-      })
+      }),
     );
 
     return res
       .status(200)
       .json(
-        new ApiResponse(200, orderData, "Successfully fetched all order data")
+        new ApiResponse(200, orderData, "Successfully fetched all order data"),
       );
   } catch (error) {
     throw new ApiError(
       error.status || 500,
       error.message ||
-        "Something went wrong while getting order details for admin"
+        "Something went wrong while getting order details for admin",
     );
   }
 });
@@ -152,4 +166,5 @@ export {
   softDeleteAccount,
   permanentlyDeleteAccountandData,
   getOrderDetails,
+  getAdimData,
 };
